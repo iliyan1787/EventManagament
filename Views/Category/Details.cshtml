@@ -1,0 +1,12 @@
+﻿@model Category
+
+<h1>Category Details</h1>
+<div>
+    <h4>Category Name</h4>
+    <p>@Model.Name</p>
+
+    <h4>Description</h4>
+    <p>@Model.Description</p>
+</div>
+
+<a href="@Url.Action("Index", "Category")" class="btn btn-secondary">Back to List</a>

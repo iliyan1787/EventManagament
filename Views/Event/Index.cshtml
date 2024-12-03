@@ -1,0 +1,108 @@
+﻿@model IEnumerable<EventManagamentSystem.Models.Event>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events - Event Management System</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css">
+    <style>
+        body {
+            background: linear-gradient(to bottom, #f5f5dc, #e3d7b4); /* Beige gradient */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #5a4e3c; /* Subtle brown for text */
+        }
+
+        .navbar {
+            background-color: #d2b48c; /* Tan for a warm and inviting look */
+        }
+
+            .navbar a {
+                color: #fff !important; /* White text for readability */
+            }
+
+        .jumbotron {
+            background: #f8f1e1; /* Light cream */
+            padding: 2rem;
+            border: 1px solid #d2b48c;
+            border-radius: 10px;
+        }
+
+            .jumbotron h1 {
+                color: #5a4e3c;
+            }
+
+        .event-card {
+            background-color: #f8f1e1;
+            border: 1px solid #d2b48c;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+            .event-card h5 {
+                color: #5a4e3c;
+            }
+
+        .footer {
+            background-color: #d2b48c;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="#">Event Management</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="/Home/Index">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/Category/Index">Categories</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/Attendee/Index">Attendees</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/Feedback/Index">Feedback</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="/Event/Index">Events</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/User/Index">Users</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="jumbotron text-center mb-4">
+            <h1 class="display-4">Upcoming Events</h1>
+            <p class="lead">Explore our exciting events and join us for unforgettable experiences.</p>
+        </div>
+
+        <div class="mt-4">
+            <h2 class="section-header">Event List</h2>
+            @foreach (var eventItem in Model)
+            {
+                <div class="event-card">
+                    <h5 class="fw-bold">Event: @eventItem.Title</h5>
+                    <p><strong>Location:</strong> @eventItem.Location</p>
+                    <p><strong>Date:</strong> @eventItem.StartDate.ToString("MMMM dd, yyyy")</p>
+                    <p><strong>Description:</strong> @eventItem.Description</p>
+                    <a class="btn btn-sm btn-primary" href="/Event/Details/@eventItem.EventId">View Details</a>
+                    <a class="btn btn-sm btn-warning" href="/Event/Edit/@eventItem.EventId">Edit</a>
+                    <a class="btn btn-sm btn-danger" href="/Event/Delete/@eventItem.EventId">Delete</a>
+                </div>
+            }
+        </div>
+
+        <div class="mt-5 text-center">
+            <a class="btn btn-lg btn-success" href="/Event/Create">Create New Event</a>
+        </div>
+    </div>
+
+    <footer class="footer text-center py-3 mt-5">
+        <p>&copy; 2023 Event Management System | Designed with Love and Care</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

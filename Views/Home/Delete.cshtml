@@ -1,0 +1,12 @@
+﻿@model EventManagamentSystem.Models.Home
+
+
+<h1>Delete Entry</h1>
+<div>
+    <p>Are you sure you want to delete the entry <strong>@Model.Title</strong>?</p>
+</div>
+<form asp-action="Delete" method="post">
+    <input type="hidden" name="Id" value="@Model.Id" />
+    <button type="submit">Delete</button>
+</form>
+<a href="/Home/Index">Cancel</a>

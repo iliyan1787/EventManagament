@@ -1,0 +1,34 @@
+﻿@model Attendee
+
+<h1>Edit Attendee</h1>
+<form asp-action="Edit" method="post">
+    <input type="hidden" name="AttendeeId" value="@Model.AttendeeId" />
+    <div>
+        <label>User:</label>
+        <select name="UserId">
+            @foreach (var user in ViewBag.Users as List<User>)
+            {
+                <option value="@user.UserId" selected="@((user.UserId == Model.UserId) ? "selected" : null)">
+                    @user.Username
+                </option>
+            }
+        </select>
+    </div>
+    <div>
+        <label>Event:</label>
+        <select name="EventId">
+            @foreach (var eventItem in ViewBag.Events as List<Event>)
+            {
+                <option value="@eventItem.EventId" selected="@((eventItem.EventId == Model.EventId) ? "selected" : null)">
+                    @eventItem.Title
+                </option>
+            }
+        </select>
+    </div>
+    <div>
+        <label>RSVP Date:</label>
+        <input type="date" name="RSVPDate" value="@Model.RSVPDate.ToString("yyyy-MM-dd")" required />
+    </div>
+    <button type="submit">Save Changes</button>
+</form>
+<a href="/Attendee/Index">Back to List</a>

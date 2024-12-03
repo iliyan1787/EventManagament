@@ -1,0 +1,118 @@
+﻿@model IEnumerable<EventManagamentSystem.Models.Feedback>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback - Event Management</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css">
+    <style>
+        body {
+            background: linear-gradient(to bottom, #f5f5dc, #e3d7b4); /* Beige gradient */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #5a4e3c; /* Warm brown for text */
+        }
+        .navbar {
+            background-color: #d2b48c; /* Tan */
+        }
+        .navbar a {
+            color: #fff !important;
+        }
+        .jumbotron {
+            background: #f8f1e1;
+            padding: 2rem;
+            border: 1px solid #d2b48c;
+            border-radius: 10px;
+        }
+        .jumbotron h1 {
+            color: #5a4e3c;
+        }
+        .table {
+            border: 1px solid #c4a484;
+        }
+        .table thead {
+            background-color: #c4a484;
+            color: white;
+        }
+        .table tbody tr:hover {
+            background-color: #f0e6d6;
+        }
+        .footer {
+            background-color: #d2b48c;
+            color: #fff;
+        }
+        .section-header {
+            color: #5a4e3c;
+            font-weight: bold;
+        }
+        .btn {
+            background-color: #c4a484;
+            color: white;
+        }
+        .btn:hover {
+            background-color: #a68a63;
+        }
+        .feedback-card {
+            background-color: #f8f1e1;
+            border: 1px solid #d2b48c;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            padding: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="#">Event Management</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="/Home/Index">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/Category/Index">Categories</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/Attendee/Index">Attendees</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="/Feedback/Index">Feedback</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/Event/Index">Events</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/User/Index">Users</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="jumbotron text-center mb-4">
+            <h1 class="display-4">Your Feedback Matters</h1>
+            <p class="lead">We value your opinions and strive to improve your experience.</p>
+        </div>
+
+        <div class="mt-4">
+            <h2 class="section-header">Feedback List</h2>
+            @foreach (var feedback in Model)
+            {
+                <div class="feedback-card">
+                    <h5 class="fw-bold">Feedback by: @feedback.User</h5>
+                    <p><strong>Comments:</strong> @feedback.Comment</p>
+                    <p><strong>Rating:</strong> @feedback.Rating / 5</p>
+                    <p><strong>Date:</strong> @feedback.FeedbackDate.ToString("MMMM dd, yyyy")</p>
+                    <a class="btn btn-sm" href="/Feedback/Details/@feedback.FeedbackId">View Details</a>
+                    <a class="btn btn-sm" href="/Feedback/Edit/@feedback.FeedbackId">Edit</a>
+                    <a class="btn btn-sm btn-danger" href="/Feedback/Delete/@feedback.FeedbackId">Delete</a>
+                </div>
+            }
+        </div>
+
+        <div class="mt-5 text-center">
+            <a class="btn btn-lg" href="/Feedback/Create">Give Feedback</a>
+        </div>
+    </div>
+
+    <footer class="footer text-center py-3 mt-5">
+        <p>&copy; 2023 Event Management System | Designed for Excellence</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

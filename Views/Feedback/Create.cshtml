@@ -1,0 +1,33 @@
+﻿@model Feedback
+
+<h1>Create Feedback</h1>
+<form asp-action="Create" method="post">
+    <div>
+        <label>User:</label>
+        <select name="UserId">
+            @foreach (var user in ViewBag.Users as List<User>)
+            {
+                <option value="@user.UserId">@user.Username</option>
+            }
+        </select>
+    </div>
+    <div>
+        <label>Event:</label>
+        <select name="EventId">
+            @foreach (var eventItem in ViewBag.Events as List<Event>)
+            {
+                <option value="@eventItem.EventId">@eventItem.Title</option>
+            }
+        </select>
+    </div>
+    <div>
+        <label>Comment:</label>
+        <textarea name="Comment"></textarea>
+    </div>
+    <div>
+        <label>Rating:</label>
+        <input type="number" name="Rating" min="1" max="5" required />
+    </div>
+    <button type="submit">Create</button>
+</form>
+<a href="/Feedback/Index">Back to List</a>

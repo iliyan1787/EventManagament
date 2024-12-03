@@ -1,0 +1,157 @@
+﻿@model IEnumerable<EventManagamentSystem.Models.Category>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categories - Event Management</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css">
+    <style>
+        body {
+            background: linear-gradient(to bottom, #f5f5dc, #e3d7b4); /* Beige gradient */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #5a4e3c; /* Warm brown for text */
+        }
+
+        .navbar {
+            background-color: #d2b48c; /* Tan */
+        }
+
+            .navbar a {
+                color: #fff !important;
+            }
+
+        .jumbotron {
+            background: #f8f1e1;
+            padding: 2rem;
+            border: 1px solid #d2b48c;
+            border-radius: 10px;
+        }
+
+            .jumbotron h1 {
+                color: #5a4e3c;
+            }
+
+        .table {
+            border: 1px solid #c4a484;
+        }
+
+            .table thead {
+                background-color: #c4a484;
+                color: white;
+            }
+
+            .table tbody tr:hover {
+                background-color: #f0e6d6;
+            }
+
+        .footer {
+            background-color: #d2b48c;
+            color: #fff;
+        }
+
+        .section-header {
+            color: #5a4e3c;
+            font-weight: bold;
+        }
+
+        .btn {
+            background-color: #c4a484;
+            color: white;
+        }
+
+            .btn:hover {
+                background-color: #a68a63;
+            }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="#">Event Management</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="/Home/Index">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="/Category/Index">Categories</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/Attendee/Index">Attendees</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/Feedback/Index">Feedback</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/Event/Index">Events</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/User/Index">Users</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="jumbotron text-center mb-4">
+            <h1 class="display-4">Explore Event Categories</h1>
+            <p class="lead">Organize your events effectively by browsing through the categories we offer.</p>
+        </div>
+
+        <div class="mt-4">
+            <h2 class="section-header">Available Categories</h2>
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th class="text-center">Category Name</th>
+                        <th class="text-center">Description</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="text-center">Music</td>
+                        <td>Concerts, gigs, and music festivals.</td>
+                        <td class="text-center">
+                            <a class="btn btn-sm" href="/Category/Details/1">View</a>
+                            <a class="btn btn-sm" href="/Category/Edit/1">Edit</a>
+                            <a class="btn btn-sm btn-danger" href="/Category/Delete/1">Delete</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">Sports</td>
+                        <td>Games, tournaments, and fitness events.</td>
+                        <td class="text-center">
+                            <a class="btn btn-sm" href="/Category/Details/2">View</a>
+                            <a class="btn btn-sm" href="/Category/Edit/2">Edit</a>
+                            <a class="btn btn-sm btn-danger" href="/Category/Delete/2">Delete</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">Workshops</td>
+                        <td>Skill development and learning sessions.</td>
+                        <td class="text-center">
+                            <a class="btn btn-sm" href="/Category/Details/3">View</a>
+                            <a class="btn btn-sm" href="/Category/Edit/3">Edit</a>
+                            <a class="btn btn-sm btn-danger" href="/Category/Delete/3">Delete</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">Technology</td>
+                        <td>Tech meetups, hackathons, and expos.</td>
+                        <td class="text-center">
+                            <a class="btn btn-sm" href="/Category/Details/4">View</a>
+                            <a class="btn btn-sm" href="/Category/Edit/4">Edit</a>
+                            <a class="btn btn-sm btn-danger" href="/Category/Delete/4">Delete</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="mt-5 text-center">
+            <a class="btn btn-lg" href="/Category/Create">Create New Category</a>
+        </div>
+    </div>
+
+    <footer class="footer text-center py-3 mt-5">
+        <p>&copy; 2023 Event Management System | Designed for Excellence</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

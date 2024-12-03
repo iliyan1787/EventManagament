@@ -1,0 +1,24 @@
+﻿@model EventManagamentSystem.Models.Home
+
+
+<h1>Create Event</h1>
+<form asp-action="Create" method="post">
+    <div>
+        <label>Title:</label>
+        <input type="text" name="Title" required />
+    </div>
+    <div>
+        <label>Location:</label>
+        <input type="text" name="Location" required />
+    </div>
+    <div>
+        <label>Start Date:</label>
+        <input type="date" name="StartDate" required />
+    </div>
+    <div>
+        <label>Description:</label>
+        <textarea name="Description"></textarea>
+    </div>
+    <button type="submit">Create</button>
+</form>
+<a href="/Event/Index">Back to List</a>

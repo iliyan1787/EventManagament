@@ -1,0 +1,11 @@
+﻿@model Feedback
+
+<h1>Delete Feedback</h1>
+<div>
+    <p>Are you sure you want to delete the feedback for the event <strong>@Model.Event.Title</strong>?</p>
+</div>
+<form asp-action="Delete" method="post">
+    <input type="hidden" name="FeedbackId" value="@Model.FeedbackId" />
+    <button type="submit">Delete</button>
+</form>
+<a href="/Feedback/Index">Cancel</a>

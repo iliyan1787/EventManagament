@@ -1,0 +1,11 @@
+﻿@model Event
+
+<h1>Delete Event</h1>
+<div>
+    <p>Are you sure you want to delete the event <strong>@Model.Title</strong>?</p>
+</div>
+<form asp-action="Delete" method="post">
+    <input type="hidden" name="EventId" value="@Model.EventId" />
+    <button type="submit">Delete</button>
+</form>
+<a href="/Event/Index">Cancel</a>

@@ -1,0 +1,128 @@
+﻿@model IEnumerable<EventManagamentSystem.Models.User>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users - Event Management System</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css">
+    <style>
+        body {
+            background: linear-gradient(to bottom, #f5f5dc, #e3d7b4);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #5a4e3c;
+        }
+
+        .navbar {
+            background-color: #d2b48c;
+        }
+
+            .navbar a {
+                color: #fff !important;
+            }
+
+        .jumbotron {
+            background: #f8f1e1;
+            padding: 2rem;
+            border: 1px solid #d2b48c;
+            border-radius: 10px;
+        }
+
+            .jumbotron h1 {
+                color: #5a4e3c;
+            }
+
+        .table {
+            border: 1px solid #c4a484;
+        }
+
+            .table thead {
+                background-color: #c4a484;
+                color: white;
+            }
+
+            .table tbody tr:hover {
+                background-color: #f0e6d6;
+            }
+
+        .footer {
+            background-color: #d2b48c;
+            color: #fff;
+        }
+
+        .section-header {
+            color: #5a4e3c;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="#">Event Management</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="/Home/Index">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/Category/Index">Categories</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/Attendee/Index">Attendees</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/Feedback/Index">Feedback</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/Event/Index">Events</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="/User/Index">Users</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="jumbotron text-center mb-4">
+            <h1 class="display-4">Users</h1>
+            <p class="lead">Manage and explore all registered users in the system.</p>
+        </div>
+
+        <div class="mt-4">
+            <h2 class="section-header">Users List</h2>
+            <table class="table table-striped table-bordered mt-3">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Registration Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model)
+                    {
+                        <tr>
+                            <td>@user.Username</td>
+                            <td>@user.Email</td>
+                            <td>@user.Role</td>
+                            <td>@user.CreatedDate.ToString("MMMM dd, yyyy")</td>
+                            <td>
+                                <a class="btn btn-sm btn-primary" href="/User/Details/@user.UserId">Details</a>
+                                <a class="btn btn-sm btn-warning" href="/User/Edit/@user.UserId">Edit</a>
+                                <a class="btn btn-sm btn-danger" href="/User/Delete/@user.UserId">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="mt-5 text-center">
+            <a class="btn btn-lg btn-success" href="/User/Create">Create New User</a>
+        </div>
+    </div>
+
+    <footer class="footer text-center py-3 mt-5">
+        <p>&copy; 2023 Event Management System | Your Solution for Event Excellence</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

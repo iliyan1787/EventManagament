@@ -1,0 +1,29 @@
+﻿@model Attendee
+
+<h1>Create Attendee</h1>
+<form asp-action="Create" method="post">
+    <div>
+        <label>User:</label>
+        <select name="UserId">
+            @foreach (var user in ViewBag.Users as List<User>)
+            {
+                <option value="@user.UserId">@user.Username</option>
+            }
+        </select>
+    </div>
+    <div>
+        <label>Event:</label>
+        <select name="EventId">
+            @foreach (var eventItem in ViewBag.Events as List<Event>)
+            {
+                <option value="@eventItem.EventId">@eventItem.Title</option>
+            }
+        </select>
+    </div>
+    <div>
+        <label>RSVP Date:</label>
+        <input type="date" name="RSVPDate" required />
+    </div>
+    <button type="submit">Create</button>
+</form>
+<a href="/Attendee/Index">Back to List</a>

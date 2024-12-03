@@ -1,0 +1,11 @@
+﻿@model Feedback
+
+<h1>Feedback Details</h1>
+<div>
+    <p><strong>User:</strong> @Model.User.Username</p>
+    <p><strong>Event:</strong> @Model.Event.Title</p>
+    <p><strong>Comment:</strong> @Model.Comment</p>
+    <p><strong>Rating:</strong> @Model.Rating</p>
+    <p><strong>Feedback Date:</strong> @Model.FeedbackDate</p>
+</div>
+<a href="/Feedback/Index">Back to List</a>
