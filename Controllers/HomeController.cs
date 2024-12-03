@@ -16,7 +16,7 @@ namespace EventManagamentSystem.Controllers
         // Index action with dynamic content
         public IActionResult Index()
         {
-            // Sample data for the homepage
+            // Sample data for homepage
             var homes = new List<Home>
             {
                 new Home { Id = 1, Title = "Discover Events Near You", Description = "Stay updated with the latest events happening in your city!" },
