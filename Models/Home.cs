@@ -14,9 +14,5 @@ namespace EventManagamentSystem.Models
         [Required]
         [StringLength(500)]
         public string Description { get; set; } = null!;
-
-        // Add additional properties as needed
-        public string OtherProperty { get; set; }  // Ensure this property exists
-
     }
 }
