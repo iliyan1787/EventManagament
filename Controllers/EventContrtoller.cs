@@ -1,99 +1,50 @@
-﻿using EventManagamentSystem.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using EventManagamentSystem.Models;
 
-[Route("[controller]")]
-public class EventController : Controller
+namespace EventManagamentSystem.Controllers
 {
-    private readonly ApplicationDbContext _context;
-
-    public EventController(ApplicationDbContext context)
+    public class EventController : Controller
     {
-        _context = context;
-    }
-
-    [HttpGet]
-    public IActionResult Index()
-    {
-        var events = _context.Events.Include(e => e.Organizer).ToList();
-        return View(events);
-    }
-
-    [HttpGet("Details/{id}")]
-    public IActionResult Details(int id)
-    {
-        var eventDetail = _context.Events.Include(e => e.Organizer).FirstOrDefault(e => e.EventId == id);
-        if (eventDetail == null)
+        public IActionResult Index()
         {
-            return NotFound();
-        }
-        return View(eventDetail);
-    }
+            var events = new List<Event>
+            {
+                new Event
+                {
+                    EventId = 1,
+                    Title = "Intergalactic Food Festival",
+                    Location = "Mars Colony Delta",
+                    StartDate = new DateTime(2030, 5, 21),
+                    Description = "Taste culinary delights from across the galaxy!"
+                },
+                new Event
+                {
+                    EventId = 2,
+                    Title = "Time Travelers' Conference",
+                    Location = "Temporal Nexus",
+                    StartDate = new DateTime(2077, 1, 15),
+                    Description = "Join discussions with explorers from past, present, and future."
+                },
+                new Event
+                {
+                    EventId = 3,
+                    Title = "Underwater Symphony",
+                    Location = "Pacific Ocean Dome",
+                    StartDate = new DateTime(2025, 11, 10),
+                    Description = "Experience music like never before in a breathtaking underwater setting."
+                },
+                new Event
+                {
+                    EventId = 4,
+                    Title = "Artificial Intelligence Art Exhibition",
+                    Location = "Silicon Valley",
+                    StartDate = new DateTime(2024, 8, 20),
+                    Description = "Explore creative masterpieces crafted by AI from around the world."
+                }
+            };
 
-    [HttpGet("Create")]
-    public IActionResult Create()
-    {
-        return View();
-    }
-
-    [HttpPost("Create")]
-    [ValidateAntiForgeryToken]
-    public IActionResult Create(Event newEvent)
-    {
-        if (ModelState.IsValid)
-        {
-            _context.Events.Add(newEvent);
-            _context.SaveChanges();
-            return RedirectToAction("Index");
+            return View(events);
         }
-        return View(newEvent);
-    }
-
-    [HttpGet("Edit/{id}")]
-    public IActionResult Edit(int id)
-    {
-        var eventToEdit = _context.Events.Find(id);
-        if (eventToEdit == null)
-        {
-            return NotFound();
-        }
-        return View(eventToEdit);
-    }
-
-    [HttpPost("Edit/{id}")]
-    [ValidateAntiForgeryToken]
-    public IActionResult Edit(int id, Event updatedEvent)
-    {
-        if (id != updatedEvent.EventId || !ModelState.IsValid)
-        {
-            return View(updatedEvent);
-        }
-        _context.Events.Update(updatedEvent);
-        _context.SaveChanges();
-        return RedirectToAction("Index");
-    }
-
-    [HttpGet("Delete/{id}")]
-    public IActionResult Delete(int id)
-    {
-        var eventToDelete = _context.Events.Find(id);
-        if (eventToDelete == null)
-        {
-            return NotFound();
-        }
-        return View(eventToDelete);
-    }
-
-    [HttpPost("Delete/{id}")]
-    [ValidateAntiForgeryToken]
-    public IActionResult DeleteConfirmed(int id)
-    {
-        var eventToDelete = _context.Events.Find(id);
-        if (eventToDelete != null)
-        {
-            _context.Events.Remove(eventToDelete);
-            _context.SaveChanges();
-        }
-        return RedirectToAction("Index");
     }
 }
