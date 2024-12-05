@@ -1,4 +1,4 @@
-﻿@model EventManagamentSystem.Controllers.HomeViewModel
+@model EventManagamentSystem.Controllers.HomeViewModel
 
 <!DOCTYPE html>
 <html lang="en">
@@ -13,35 +13,44 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: #5a4e3c; /* Subtle brown for text */
         }
+
         .navbar {
             background-color: #d2b48c; /* Tan for a warm and inviting look */
         }
-        .navbar a {
-            color: #fff !important; /* White text for readability */
-        }
+
+            .navbar a {
+                color: #fff !important; /* White text for readability */
+            }
+
         .jumbotron {
             background: #f8f1e1; /* Light cream */
             padding: 2rem;
             border: 1px solid #d2b48c;
             border-radius: 10px;
         }
-        .jumbotron h1 {
-            color: #5a4e3c;
-        }
+
+            .jumbotron h1 {
+                color: #5a4e3c;
+            }
+
         .section-header {
             color: #5a4e3c;
             font-weight: bold;
         }
+
         .table {
             border: 1px solid #c4a484;
         }
-        .table thead {
-            background-color: #c4a484;
-            color: white;
-        }
-        .table tbody tr:hover {
-            background-color: #f0e6d6;
-        }
+
+            .table thead {
+                background-color: #c4a484;
+                color: white;
+            }
+
+            .table tbody tr:hover {
+                background-color: #f0e6d6;
+            }
+
         .footer {
             background-color: #d2b48c;
             color: #fff;
@@ -72,6 +81,10 @@
         <div class="jumbotron text-center mb-4">
             <h1 class="display-4">Welcome to Event Management System</h1>
             <p class="lead">Plan, organize, and explore events effortlessly with a touch of elegance.</p>
+            <div style="background-color: #f8f1e1; padding: 1rem; border-radius: 10px; display: inline-block;">
+                <strong>Next Big Event Starts In:</strong>
+                <span id="countdown-timer" class="fw-bold" style="color: #d9534f;">Loading...</span>
+            </div>
         </div>
 
         <div class="row">
@@ -84,6 +97,9 @@
                             <strong>@highlight</strong>
                         </li>
                     }
+                    <li class="list-group-item text-center" style="background-color: #ffeeba; border-color: #ffca2c;">
+                        ✨ "The best way to predict your future is to create it." — Abraham Lincoln
+                    </li>
                 </ul>
             </div>
             <div class="col-md-6">
@@ -92,6 +108,18 @@
                     <p>Our platform offers a seamless way to manage events, attendees, and feedback.</p>
                     <p>Enjoy intuitive navigation and robust features tailored for success.</p>
                 </div>
+            </div>
+        </div>
+
+        <div class="col-md-12 mt-4">
+            <div class="p-4" style="background-color: #fdf6e3; border: 1px solid #d2b48c; border-radius: 5px;">
+                <h2 class="section-header text-center">Fun Facts to Brighten Your Day</h2>
+                <ul class="list-unstyled">
+                    <li>🎉 Did you know? The world’s largest snowflake was reportedly 15 inches wide!</li>
+                    <li>🌟 Your chances of having a great event here? 110% (we did the math).</li>
+                    <li>😂 Why don’t skeletons attend events? Because they don’t have the guts!</li>
+                    <li>💡 Life Hack: Always RSVP to our events – FOMO is real!</li>
+                </ul>
             </div>
         </div>
 
@@ -115,12 +143,93 @@
                 </tbody>
             </table>
         </div>
-    </div>
+
+        <div class="mt-4">
+            <h2 class="section-header">Event Trivia</h2>
+            <p>Can you guess the correct answer?</p>
+            <blockquote style="font-style: italic; color: #5a4e3c;">“What’s the most-attended event in human history?”</blockquote>
+            <ul class="list-unstyled">
+                <li><input type="radio" name="quiz" id="option1"> <label for="option1">The World Cup Finals</label></li>
+                <li><input type="radio" name="quiz" id="option2"> <label for="option2">Kumbh Mela in India</label></li>
+                <li><input type="radio" name="quiz" id="option3"> <label for="option3">The Olympics</label></li>
+            </ul>
+            <p id="quiz-answer" style="display:none; color: green; font-weight: bold;">Correct! Great choice, every answer leads to success!</p>
+            <button class="btn btn-sm btn-success mt-3"
+                    style="background-color: #28a745; border-color: #218838; color: white; border-radius: 5px; font-weight: bold; padding: 10px 20px;"
+                    onclick="document.getElementById('quiz-answer').style.display='block';">
+                Check Answer
+            </button>
+        </div>
+
+        <div class="mt-5">
+            <h2 class="section-header">Countdown to Our Biggest Event!</h2>
+            <p class="text-muted">Don't miss the fun. Get ready to make unforgettable memories!</p>
+            <div id="countdown" style="font-size: 2rem; color: #5a4e3c; font-weight: bold;"></div>
+        </div>
+
+        <div class="mt-5">
+            <h2 class="section-header">Fun Fact Generator</h2>
+            <p>Click the button to discover something cool about events!</p>
+            <p id="fun-fact" style="font-style: italic; color: #5a4e3c;"></p>
+            <button class="btn btn-warning mt-3"
+                    style="border-radius: 5px; font-weight: bold; padding: 10px 20px;"
+                    onclick="generateFunFact();">
+                Generate Fun Fact
+            </button>
+        </div>
 
     <footer class="footer text-center py-3 mt-5">
         <p>&copy; 2023 Event Management System | Designed for Excellence</p>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const targetDate = new Date("2023-12-31T23:59:59");
+        function updateCountdown() {
+            const now = new Date();
+            const diff = targetDate - now;
+            if (diff <= 0) {
+                document.getElementById("countdown-timer").innerText = "The event has started!";
+                return;
+            }
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const minutes = Math.floor((diff / 1000 / 60) % 60);
+            const seconds = Math.floor((diff / 1000) % 60);
+            document.getElementById("countdown-timer").innerText = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        }
+        setInterval(updateCountdown, 1000);
+
+            function countdownToEvent() {
+                const eventDate = new Date("2024-12-31T00:00:00").getTime();
+                const now = new Date().getTime();
+                const distance = eventDate - now;
+
+                if (distance > 0) {
+                    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                    document.getElementById("countdown").innerHTML =
+                        `${days} days, ${hours} hours, ${minutes} minutes, and ${seconds} seconds left!`;
+                } else {
+                    document.getElementById("countdown").innerHTML = "The event is happening now! 🎉";
+                }
+            }
+            setInterval(countdownToEvent, 1000);
+
+            // Fun Fact Generator
+            const funFacts = [
+                "The first recorded festival was in Ancient Egypt over 4,000 years ago!",
+                "Over 3 million people attend Oktoberfest in Munich every year!",
+                "Did you know? Woodstock in 1969 drew over 400,000 attendees!",
+                "The largest human gathering in history was Kumbh Mela, with over 30 million people in one day.",
+                "Fun fact: The Olympics were originally part of a religious festival in Ancient Greece.",
+            ];
+
+            function generateFunFact() {
+                const randomFact = funFacts[Math.floor(Math.random() * funFacts.length)];
+                document.getElementById("fun-fact").innerHTML = randomFact;
+            }
+    </script>
 </body>
 </html>
