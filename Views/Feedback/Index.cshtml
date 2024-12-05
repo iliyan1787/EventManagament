@@ -1,4 +1,4 @@
-﻿@model IEnumerable<EventManagamentSystem.Models.Feedback>
+@model IEnumerable<EventManagamentSystem.Models.Feedback>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -7,58 +7,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feedback - Event Management</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
-            background: linear-gradient(to bottom, #f5f5dc, #e3d7b4); /* Beige gradient */
+            background: linear-gradient(to right, #f5f5dc, #e3d7b4); /* Light gradient */
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #5a4e3c; /* Warm brown for text */
+            color: #5a4e3c;
         }
+
         .navbar {
-            background-color: #d2b48c; /* Tan */
+            background-color: #d2b48c;
         }
+
         .navbar a {
             color: #fff !important;
         }
+
         .jumbotron {
             background: #f8f1e1;
             padding: 2rem;
             border: 1px solid #d2b48c;
             border-radius: 10px;
+            animation: fadeIn 1s ease-in-out;
         }
+
         .jumbotron h1 {
             color: #5a4e3c;
         }
-        .table {
-            border: 1px solid #c4a484;
+
+        .feedback-card {
+            background-color: #fff8e7;
+            border: 1px solid #d2b48c;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
         }
-        .table thead {
-            background-color: #c4a484;
-            color: white;
+
+        .feedback-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
         }
-        .table tbody tr:hover {
-            background-color: #f0e6d6;
+
+        .feedback-card h5 {
+            color: #5a4e3c;
         }
+
+        .btn {
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .btn:hover {
+            background-color: #a68a63;
+            color: #fff;
+        }
+
         .footer {
             background-color: #d2b48c;
             color: #fff;
         }
+
         .section-header {
             color: #5a4e3c;
             font-weight: bold;
         }
-        .btn {
-            background-color: #c4a484;
-            color: white;
-        }
-        .btn:hover {
-            background-color: #a68a63;
-        }
-        .feedback-card {
-            background-color: #f8f1e1;
-            border: 1px solid #d2b48c;
-            border-radius: 10px;
-            margin-bottom: 1rem;
-            padding: 1rem;
+
+
+        .rating-stars {
+            color: #ffcc00;
         }
     </style>
 </head>
@@ -95,17 +112,37 @@
                 <div class="feedback-card">
                     <h5 class="fw-bold">Feedback by: @feedback.User</h5>
                     <p><strong>Comments:</strong> @feedback.Comment</p>
-                    <p><strong>Rating:</strong> @feedback.Rating / 5</p>
+                    <p>
+                        <strong>Rating:</strong> 
+                        <span class="rating-stars">
+                            @for (var i = 0; i < feedback.Rating; i++)
+                            {
+                                <i class="fas fa-star"></i>
+                            }
+                            @for (var i = feedback.Rating; i < 5; i++)
+                            {
+                                <i class="far fa-star"></i>
+                            }
+                        </span>
+                    </p>
                     <p><strong>Date:</strong> @feedback.FeedbackDate.ToString("MMMM dd, yyyy")</p>
-                    <a class="btn btn-sm" href="/Feedback/Details/@feedback.FeedbackId">View Details</a>
-                    <a class="btn btn-sm" href="/Feedback/Edit/@feedback.FeedbackId">Edit</a>
-                    <a class="btn btn-sm btn-danger" href="/Feedback/Delete/@feedback.FeedbackId">Delete</a>
+                    <div class="d-flex gap-2">
+                        <a class="btn btn-sm btn-primary d-flex align-items-center" href="/Feedback/Details/@feedback.FeedbackId">
+                            <i class="fas fa-info-circle me-1"></i> View Details
+                        </a>
+                        <a class="btn btn-sm btn-warning d-flex align-items-center" href="/Feedback/Edit/@feedback.FeedbackId">
+                            <i class="fas fa-edit me-1"></i> Edit
+                        </a>
+                        <a class="btn btn-sm btn-danger d-flex align-items-center" href="/Feedback/Delete/@feedback.FeedbackId">
+                            <i class="fas fa-trash me-1"></i> Delete
+                        </a>
+                    </div>
                 </div>
             }
         </div>
 
         <div class="mt-5 text-center">
-            <a class="btn btn-lg" href="/Feedback/Create">Give Feedback</a>
+            <a class="btn btn-lg btn-success" href="/Feedback/Create">Give Feedback</a>
         </div>
     </div>
 
